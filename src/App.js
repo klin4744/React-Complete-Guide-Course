@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./App.css";
+import styles from "./App.css";
 import Person from "./Person/Person";
 
 class App extends Component {
@@ -42,17 +42,9 @@ class App extends Component {
     });
   };
   render() {
-    const style = {
-      backgroundColor: "green",
-      color: "white",
-      font: "inherit",
-      border: "1px solid black",
-      padding: "8px",
-      cursor: "pointer"
-    };
     let persons = null;
+    let btnClass = "";
     if (this.state.showPersons) {
-      style.backgroundColor = "red";
       persons = (
         <div>
           {this.state.persons.map((person, index) => (
@@ -66,19 +58,20 @@ class App extends Component {
           ))}
         </div>
       );
+      btnClass = styles.Red;
     }
     const classes = [];
     if (this.state.persons.length <= 2) {
-      classes.push("red"); // classes = ["red"]
+      classes.push(styles.red); // classes = ["red"]
     }
     if (this.state.persons.length <= 1) {
-      classes.push("bold"); // classes = ["red","bold"]
+      classes.push(styles.bold); // classes = ["red","bold"]
     }
     return (
-      <div className="App">
+      <div className={styles.App}>
         <h1>Hi, I'm a React App</h1>
         <p className={classes.join(" ")}>This is a paragraph</p>
-        <button style={style} onClick={this.togglePersonsHandler}>
+        <button onClick={this.togglePersonsHandler} className={btnClass}>
           Toggle Names
         </button>
         {persons}
